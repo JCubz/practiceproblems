@@ -5,7 +5,7 @@ import myTrie.TrieNode;
 public class TrieTree {
 	TrieNode[] roots;
 
-	TrieTree() {
+	public TrieTree() {
 		roots = new TrieNode[26];
 	}
 
@@ -16,17 +16,18 @@ public class TrieTree {
 		word = word.toLowerCase();
 		TrieNode tn = null;
 		for (char c : word.toCharArray()) {
-			if (tn == null && roots['a' - c] == null) {
+			if (tn == null && roots[c - 'a'] == null) {
 				tn = new TrieNode(c, false);
+				roots[c - 'a'] = tn;
 			} else if (tn == null) {
-				tn = roots['a' - c];
+				tn = roots[c - 'a'];
 			} else if (tn.hasChild(c))
 				tn.getChild(c);
 			else {
 				tn = tn.addChild(c);
 			}
 		}
-		
+
 		boolean alreadyExists = tn.isWord();
 		tn.changeWord(true);
 		return alreadyExists;
@@ -35,21 +36,22 @@ public class TrieTree {
 	/*
 	 * returns whether the word exists
 	 */
-	public boolean checkWord(String word){
+	public boolean checkWord(String word) {
 		word = word.toLowerCase();
 		TrieNode tn = null;
 		for (char c : word.toCharArray()) {
-			if (tn == null && roots['a' - c] == null) {
+			if (tn == null && roots[c - 'a'] == null) {
 				return false;
 			} else if (tn == null) {
-				tn = roots['a' - c];
+				tn = roots[c - 'a'];
 			} else if (tn.hasChild(c))
 				tn.getChild(c);
 			else {
-				return true;
+				System.out.println("got to letter " + c);
+				break;
 			}
 		}
-		
+		System.out.print("Got here");
 		boolean alreadyExists = tn.isWord();
 		return alreadyExists;
 	}
