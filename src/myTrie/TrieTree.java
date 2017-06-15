@@ -22,7 +22,7 @@ public class TrieTree {
 			} else if (tn == null) {
 				tn = roots[c - 'a'];
 			} else if (tn.hasChild(c))
-				tn.getChild(c);
+				tn = tn.getChild(c);
 			else {
 				tn = tn.addChild(c);
 			}
@@ -44,14 +44,13 @@ public class TrieTree {
 				return false;
 			} else if (tn == null) {
 				tn = roots[c - 'a'];
-			} else if (tn.hasChild(c))
-				tn.getChild(c);
+			} else if (tn.hasChild(c)) {
+				tn = tn.getChild(c);
+			}
 			else {
-				System.out.println("got to letter " + c);
 				break;
 			}
 		}
-		System.out.print("Got here");
 		boolean alreadyExists = tn.isWord();
 		return alreadyExists;
 	}
