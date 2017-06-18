@@ -1,10 +1,11 @@
 package myHashMap;
 
-public class MyKey<Key> {
+public class MyKeyValue<Key> {
 	Key key;
-	Object o;
-	MyKey(Key key) {
+	Object value;
+	MyKeyValue(Key key, Object value) {
 		this.key = key;
+		this.value = value;
 		key.getClass();
 	}
 	
@@ -19,12 +20,17 @@ public class MyKey<Key> {
 		}
 		
 		return result;
-	}	
+	}
 	
 	@Override 
 	public boolean equals(Object comparekey) {
-		if(comparekey.getClass().equals(key.getClass()) && comparekey.toString() == key.toString())
+		//if(comparekey.getClass().equals(key.getClass()) && comparekey.toString() == key.toString())
+		if(comparekey.equals(key))
 			return true;
 		return false;
+	}
+	
+	public Object getValue() {
+		return value;
 	}
 }
